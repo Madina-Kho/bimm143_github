@@ -1,0 +1,218 @@
+---
+title: "Class 5: Data Viz with ggplot2"
+author: "Madina(PID: 185)"
+format: pdf
+toc: true
+---
+
+## Background
+
+There are many graphics system in R for making plots and figures. These include so-called *"base R" graphics* like the `plot()` function and add on packages like **ggplot2**.
+
+Let's compare how we make a simple figure with these two systems:
+
+We can use the in-built `cars` dataset:
+
+```{r}
+head(cars)
+```
+
+```{r}
+plot(cars)
+```
+
+Before I can use the **ggplot2** I need to install it on my computer.
+To do this we can use the function `install.packages("ggplot2")`.
+
+> **N.B.** We never run `install.packages()` in our quarto doc (we run it once only in R console) as it would re-install the package everytime we render the code.
+
+Once installed we need to load up the package into our R brain
+```{r}
+library(ggplot2)
+```
+
+
+The main function in **ggplot2** package is called `ggplot()`
+```{r}
+ggplot(cars)
+```
+
+Every ggplot has at least 3 layers
+
+- The **data** (a data.frame of the stuff we wnat to plot)
+- The **aes**thetics ( how the data maps to the plot)
+- The **geom** layer(how you want the plot drawn, e.g points, line, etc.)
+
+```{r}
+ggplot(cars) +
+  aes(x=speed ,y=dist ) + 
+  geom_point()
+```
+
+## Add some custom features
+
+Let's add a trend line that shows the relationship between the speec and distance.
+
+```{r}
+ggplot(cars) +
+  aes(x=speed ,y=dist ) + 
+  geom_point() +
+  geom_line()
+```
+
+```{r}
+ggplot(cars) +
+  aes(x=speed ,y=dist ) + 
+  geom_point() +
+  geom_smooth() +
+  theme_bw() + 
+  labs(title = "Stoping Distribution of Old Cars",
+       x="Speed(MPH)",
+       y="Distance(ft)")
+```
+
+
+
+> Q. Can you maek the `geom_smooth()` function produce alinea straight line fit to the data trend line and trun-off the grey error region.
+
+```{r}
+ggplot(cars) +
+  aes(x=speed ,y=dist ) + 
+  geom_point() +
+  geom_smooth(method = lm, se=FALSE) +
+  theme_bw() + 
+  labs(title = "Stoping Distribution of Old Cars",
+       x="Speed(MPH)",
+       y="Distance(ft)")
+```
+
+---
+
+## Gene Expression Data
+
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+```
+
+
+```{r}
+up <- sum(genes$State == "up")
+up
+total <- nrow(genes)
+total
+ncol(genes)
+fraction <- up/total
+fraction
+round(fraction, 2)
+```
+ A useful new function in this context is the `table()` function.
+ 
+```{r}
+table(genes$State)
+```
+ 
+ 
+My first plot attempt
+
+```{r}
+ggplot(genes) + 
+  aes(Condition1, Condition2, col=State) + 
+  geom_point() +
+  labs(title="Gene Expression Changes upon GLP-1 Inhibitor Drug Treatment", x="Control(no drug)", y="Drug Treatment") + 
+  scale_color_manual(values = c("purple", "grey","orange"))
+```
+
+
+Here we read the famous gapminder
+
+```{r}
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+gapminder <- read.delim(url)
+head(gapminder)
+
+```
+
+> Q. How many entries (i.e. rows are in this dataset)
+
+```{r}
+nrow(gapminder)
+```
+
+> Q. How many "countries" are in this dataset?
+
+```{r}
+length(table(gapminder$country))
+```
+
+```{r}
+length(unique(gapminder$country))
+```
+
+Let's make our first plot of the entire dataset.
+
+Plot of the "gdpPercap" vs "lifeExp" colored by "continent".
+
+```{r}
+p <- ggplot(gapminder) +
+  aes(gdpPercap, lifeExp, col=continent) +
+  geom_point(alpha=0.3)
+```
+
+```{r}
+p
+```
+
+
+I can add more layers to "p"
+```{r}
+p + facet_wrap(~continent)
+```
+
+Make a plot for 1977 and 2007 not all year in the dataset.
+
+First use the **dplyr** package and the `filter()` function from the package to extract the rows from the year 2007.
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+```
+
+```{r}
+gapminder_year_2007 <- filter(gapminder, year == 2007)
+gapminder_year_1977 <- filter(gapminder, year == 1977)
+g <- filter(gapminder, year ==2007 | year == 1977)
+```
+
+```{r}
+ggplot(gapminder_year_2007) + 
+aes(gdpPercap, lifeExp, col=continent, size=pop) + 
+  geom_point()
+```
+
+```{r}
+ggplot(g) + 
+  aes(gdpPercap, lifeExp, col=continent, size = pop) + 
+  geom_point() + 
+  facet_wrap(~year)
+
+```
+
+> Q. Make a histogram of lifeExp colored by continent.(use `fill=continent` or `col=continent`)
+
+
+```{r}
+ggplot(gapminder) + 
+  aes(lifeExp, fill = continent) + 
+  geom_histogram()
+```
+
+> Q. Make a histogram of lifeExp faceted by continent
+
+```{r}
+ggplot(gapminder) + 
+  aes(lifeExp, fill = continent) + 
+  geom_histogram() + 
+  facet_wrap(~continent)
+```
