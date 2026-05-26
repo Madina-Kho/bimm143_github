@@ -99,8 +99,8 @@ A useful function here is the base R `sample()` function.
 sample(1:5, size = 55, replace=TRUE)
 ```
 
-     [1] 5 5 3 2 3 3 5 5 4 3 2 3 1 3 4 1 2 3 4 4 5 1 3 1 4 1 3 5 2 5 5 4 1 4 5 5 3 4
-    [39] 5 2 1 4 5 3 5 2 3 4 3 1 3 5 5 3 1
+     [1] 3 2 1 5 4 3 2 4 1 4 4 5 5 1 5 3 1 2 4 5 3 2 3 4 5 2 3 1 4 4 4 1 4 3 1 3 4 4
+    [39] 4 1 3 4 3 4 3 5 3 2 1 1 1 2 4 5 2
 
 > Q2a. Your first version should return a multi-element vector of single
 > character nucleotides. For example generate_dna(6) might return “A”,
@@ -115,7 +115,7 @@ We can use this to make a random nucleotide sequence if we draw from
 sample(x=c("A","C","G","T"), size = 10, replace = TRUE)
 ```
 
-     [1] "G" "A" "A" "C" "G" "T" "T" "G" "T" "A"
+     [1] "A" "A" "A" "G" "C" "G" "A" "G" "C" "A"
 
 > **Q2a**. Your first version should return a multi-element vector of
 > single character nucleotides. For example generate_dna(6) might return
@@ -133,14 +133,14 @@ generate_dna <- function(len=10) {
 generate_dna()
 ```
 
-     [1] "T" "G" "G" "A" "G" "C" "T" "G" "T" "G"
+     [1] "C" "G" "T" "C" "C" "A" "T" "A" "A" "A"
 
 ``` r
 generate_dna(len=20)
 ```
 
-     [1] "C" "C" "G" "G" "G" "C" "C" "A" "T" "C" "T" "C" "A" "C" "A" "T" "C" "A" "T"
-    [20] "G"
+     [1] "A" "G" "G" "G" "T" "G" "T" "T" "T" "T" "A" "T" "C" "C" "G" "T" "A" "T" "A"
+    [20] "C"
 
 > **Q2b**. Your second version should **optionally** be able to return
 > either a multi-element vector of single character nucleotides (as
@@ -174,7 +174,7 @@ generate_dna <- function(len, single.element=TRUE) {
 generate_dna(len = 20)
 ```
 
-    [1] "ACATGATTACATTCGAGGGC"
+    [1] "CTATCTGCCTTGGATTGAAT"
 
 > **Q2c**. Finally, create a final version of your function that prints
 > out a FASTA format sequence with an id line indicating the sequence
@@ -221,7 +221,7 @@ x <- generate_dna(20)
 ```
 
     >len20
-    TGCATCATATCTGCGATGGT
+    CTACCCTTATGACGCAGTAG
 
 ## 3. Write a `generate_protein()` function
 
@@ -251,7 +251,7 @@ generate_protein <- function(length) {
 generate_protein(6)
 ```
 
-    [1] "LVWCGE"
+    [1] "CDYTWK"
 
 ## 4. Generate random protein sequences of length 6 to 13
 
@@ -276,21 +276,21 @@ for (l in 6:13) {
 ```
 
     >6
-    HEHGST 
+    SSQWGE 
     >7
-    CMAMIQV 
+    PEDPYAN 
     >8
-    CKEETYLS 
+    PYFTMQRQ 
     >9
-    LHWRANMCC 
+    IHWWLNHTH 
     >10
-    GWVRAWDMFF 
+    MKQVMRFDQH 
     >11
-    PSRCPMAMNHD 
+    LTSQGVDAHSN 
     >12
-    NHYCQFGYVNMW 
+    IVNSDHQPWWMA 
     >13
-    FHYEIHAGRPKIN 
+    GMWEHETDSCVLS 
 
 ## 5. Are our peptides “unique in nature”?
 

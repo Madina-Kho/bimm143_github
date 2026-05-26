@@ -35,7 +35,7 @@ this we can use the `rnowm()` function:
 hist( rnorm(10000, mean = 3) )
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-1-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-1-1.png)
 
 ``` r
 x <- c(rnorm(30, mean = -3), rnorm(30, mean = 3))
@@ -48,7 +48,7 @@ z <- cbind(x = x, y = rev(x))
 plot(z)
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-3-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-3-1.png)
 
 Now we can run `kmeans()` on this input `z` to see what the results look
 like.
@@ -64,16 +64,16 @@ km
 
     Cluster means:
               x         y
-    1 -3.173919  3.014658
-    2  3.014658 -3.173919
+    1 -2.776809  3.200473
+    2  3.200473 -2.776809
 
     Clustering vector:
      [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2
     [39] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 
     Within cluster sum of squares by cluster:
-    [1] 52.45043 52.45043
-     (between_SS / total_SS =  91.6 %)
+    [1] 54.98262 54.98262
+     (between_SS / total_SS =  90.7 %)
 
     Available components:
 
@@ -117,8 +117,8 @@ km$centers
 ```
 
               x         y
-    1 -3.173919  3.014658
-    2  3.014658 -3.173919
+    1 -2.776809  3.200473
+    2  3.200473 -2.776809
 
 > Q. Plot`z` colored by the kmeans cluster assignment and add cluster
 > centers as blue points.
@@ -129,7 +129,7 @@ km$centers
 plot(z, col = c("red","blue"))
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-9-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-9-1.png)
 
 ``` r
 ## As each number represents a color we can just type in the number and the color will show up
@@ -138,7 +138,7 @@ plot(z, col = km$cluster)
 points(km$centers, col = "blue", pch = 15)
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-10-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-10-1.png)
 
 > Q. Run a kmeans clustering and add plot the results asking for 4
 > clusters (K=4)?
@@ -149,7 +149,7 @@ plot(z, col=km4$cluster)
 points(km4$centers, col = km4$cluster, pch = 15)
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-11-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-11-1.png)
 
 > **N.B.** You need to tell K-means the number of clusters (i.e set
 > `centers=2`)!!
@@ -169,7 +169,7 @@ plot(ans,  typ ="o",
      xlab=" Number of Clusters", ylab= "Total Number of Within SS")
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-12-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-12-1.png)
 
 ## Hierarchical Clustering
 
@@ -204,7 +204,7 @@ plot(hc)
 abline(h=8, col = "red")
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-14-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-14-1.png)
 
 Once we have our `hclust()` object (Our “tree of cluster dendogram”) we
 can *“cut”* the tree to reval the clustering pattern.
@@ -213,8 +213,8 @@ can *“cut”* the tree to reval the clustering pattern.
 cutree(hc, h=8)
 ```
 
-     [1] 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3
-    [39] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3
+     [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2
+    [39] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 
 > Q. Make a plot of `z` with your hclust results (i.e. colored by
 > cluster membership)
@@ -224,7 +224,7 @@ grps <- cutree(hc, k=2)
 plot(z, col = grps)
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-16-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-16-1.png)
 
 ## Principal Component Analysis (PCA)
 
@@ -352,7 +352,7 @@ messy or inconsistent data.
 barplot(as.matrix(x), beside=T, col=rainbow(nrow(x)))
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-23-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-23-1.png)
 
 > Q3: Changing what optional argument in the above barplot() function
 > results in the following plot?
@@ -365,7 +365,7 @@ the default as well.
 barplot(as.matrix(x), beside=F, col=rainbow(nrow(x)))
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-24-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-24-1.png)
 
 ## Tidy data
 
@@ -437,7 +437,7 @@ ggplot(x_long) +
   theme_bw()
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-30-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-30-1.png)
 
 > Q4: Changing what optional argument in the above ggplot() code results
 > in a stacked barplot figure?
@@ -452,7 +452,7 @@ ggplot(x_long) +
   theme_bw()
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-31-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-31-1.png)
 
 ## Exploratory Analysis
 
@@ -467,7 +467,7 @@ Make some plots to help make sense of obvious trends.
 pairs(x, col=rainbow(nrow(x)), pch=16)
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-32-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-32-1.png)
 
 The `pairs()` code creates a matrix of scatterplots showing all pairwise
 comparisons between the variables in x, with each point representing a
@@ -485,7 +485,7 @@ library(pheatmap)
 pheatmap( as.matrix(x) )
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-33-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-33-1.png)
 
 **Key-point** Even relatively small datasets can prove challenging to
 interpret
@@ -568,7 +568,7 @@ ggplot(pca$x) +
   theme_bw()
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-37-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-37-1.png)
 
 > Q8. Customize your plot so that the colors of the country names match
 > the colors in our UK and Ireland map and table at start of this
@@ -594,7 +594,7 @@ ggplot(plot_df, aes(x = PC1, y = PC2)) +
   theme(legend.position = "none")
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-38-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-38-1.png)
 
 > Below we can use the square of pca\$sdev , which stands for “standard
 > deviation”, to calculate how much variation in the original data each
@@ -634,7 +634,7 @@ ggplot(variance_df) +
   theme(axis.text.x = element_text(angle = 0))
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-41-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-41-1.png)
 
 ``` r
 ## Lets focus on PC1 as it accounts for > 90% of variance 
@@ -648,7 +648,7 @@ ggplot(pca$rotation) +
   theme(axis.text.y = element_text(size = 9))
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-42-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-42-1.png)
 
 Here we see observations (foods) with the largest positive loading
 scores that effectively “push” N. Ireland to right positive side of the
@@ -672,7 +672,7 @@ ggplot(pca$rotation) +
   theme(axis.text.y = element_text(size = 9))
 ```
 
-![](Lab07-Machine-Learning-1_files/figure-commonmark/unnamed-chunk-43-1.png)
+![](class07_files/figure-commonmark/unnamed-chunk-43-1.png)
 
 > The two food groups that usually stand out most on *PC2* are
 > **Fresh_fruit** and **Fresh_potatoes**. *PC2* mainly tells us about a
