@@ -14,7 +14,7 @@ Class 7: [Machine Learning I](Class07/class07.md)
 
 Class 8: [Unsupervised Learning Mini Project](Class08/class08.md)
 
-Class 9: [Mini Prject Candy](Class09/class09.md)
+Class 9: [Mini Project Candy](Class09/class09.md)
 
 Class 10: [Structural Bioinformatic I](Class10/class10.md)
 
