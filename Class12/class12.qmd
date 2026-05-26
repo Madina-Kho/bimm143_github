@@ -1,0 +1,96 @@
+---
+title: 'Lab12: Homework'
+author: "Madina Khorami (A18555185)"
+date: "2026-05-09"
+output: pdf_document
+toc: true
+---
+
+
+## Section 1: Proportion of G|G in a population
+
+We read the file from the provided link Ensemble https://useast.ensembl.org/Homo_sapiens/Variation/Sample?db=core;r=17:39895045-39895145;v=rs8067378;vdb=variation;vf=959672880#373531tablePanel.
+
+> Q5: What proportion of the Mexican Ancestry in Los Angeles sample population
+(MXL) are homozygous for the asthma associated SNP (G|G)? HINT: You can filter the displayed genotypes by entering the population code MXL. Then either count those of interest or download a CVS file for this population and use excel or the R functions read.csv(), and table() to answer this question]
+
+```{r}
+mxl_data <- read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(mxl_data)
+```
+```{r}
+table(mxl_data$Genotype..forward.strand.)
+
+```
+
+```{r}
+table(mxl_data$Genotype..forward.strand.) / nrow(mxl_data) * 100
+```
+
+So the the G|G percentage for the Mexicans living in the Los Angeles is 14% and this means this genotype percentage is associated to the childhood asthma.
+
+
+## Section 4: Population Scale Analysis
+
+> Q13: Read this file into R and determine the sample size for each genotype and their corresponding median expression levels for each of these genotypes. 
+
+Read the data from URL.
+
+```{r}
+url <- "https://bioboot.github.io/bggn213_W19/class-material/rs8067378_ENSG00000172057.6.txt"
+data <- read.table(url, header = TRUE)
+```
+
+
+
+Calculate the sample size (n) for each genotype.
+
+```{r}
+sample_size <- table(data$geno)
+sample_size
+```
+
+
+To calculate the median expression of each genotype we Ggroup by genotype and calculate sample size and median
+
+
+```{r}
+library(dplyr)
+
+results <- data %>% 
+  group_by(geno) %>% 
+  summarize(sample_size = n(), 
+            median_exp = median(exp))
+
+print(results)
+```
+
+
+ > Q14: Generate a boxplot with a box per genotype, what could you infer from the relative
+expression value between A/A and G/G displayed in this plot? Does the SNP effect the
+expression of ORMDL3?
+
+To make the boxplot we need the ggplot.
+
+```{r}
+library(ggplot2)
+ggplot (data) +
+aes (geno, exp, fill=geno) + 
+  geom_boxplot (notch=TRUE) +
+  geom_jitter(alpha= 0.4, width = 0.2)
+
+```
+
+
+Yes, the SNP (rs8067378) have a strong effect on the expression of ORMDL3 as distinct separation between the median expression levels of the three genotypes visualized in the boxplot it suggests that this genetic variation is a quantitative trait locus for the ORMDL3 gene. As the number of G alleles increases, the expression of the gene significantly decreases
+
+
+
+
+
+
+
+
+
+
+
