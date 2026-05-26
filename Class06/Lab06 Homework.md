@@ -1,0 +1,38 @@
+# Lab06 Homework
+Madina Khorami (A18555185)
+
+# Improving analysis code by writing functions
+
+**Q6a.** How would you generalize the original code above to work with
+any set of input protein structures?
+
+> This code creates a data frame and attempts to normalize each column
+> and repeating the same normalization formula multiple times for each
+> column.
+
+``` r
+# A. Can you improve this analysis code?
+df <- data.frame(a=1:10, b=seq(200,400,length=10),c=11:20,d=NA)
+df$a <- (df$a - min(df$a)) / (max(df$a) - min(df$a))
+df$b <- (df$b - min(df$a)) / (max(df$b) - min(df$b))
+df$c <- (df$c - min(df$c)) / (max(df$c) - min(df$c))
+df$d <- (df$d - min(df$d)) / (max(df$a) - min(df$d)) 
+```
+
+One way that better improve this code is to create a function that
+avoids the repeat of writing the normalization formula
+
+``` r
+normalize <- function(x) {
+  (x - min(x)) / (max(x) - min(x))
+}
+
+dfnorm <- data.frame(a=1:10, b=seq(200,400,length=10), c=11:20, d=NA)
+
+dfnorm$a <- normalize(dfnorm$a)
+dfnorm$b <- normalize(dfnorm$b)
+dfnorm$c <- normalize(dfnorm$c)
+dfnorm$d <- normalize(dfnorm$d)
+```
+
+# B.
