@@ -4,13 +4,13 @@ My class work from [BIMM143 at UC San Diego Spring 2026](https://bioboot.github.
 
 ## Index of Classes
 
-Class 4: [Introduction to R](Class04/Class04.pdf)
+Class 4: [Introduction to R](Class04/Class04.md)
 
-Class 5: [Data Viz with ggplot2](Class05/class05.pdf)
+Class 5: [Data Viz with ggplot2](Class05/class05.md)
 
-Class 6: [R Functions](Class06/class06.pdf)
+Class 6: [R Functions](Class06/class06.md)
 
-Class 7: [Machine Learning I](Class07/class07.pdf)
+Class 7: [Machine Learning I](Class07/class07.md)
 
 Class 8: [Mini Project](Class08/class08.pdf)
 
